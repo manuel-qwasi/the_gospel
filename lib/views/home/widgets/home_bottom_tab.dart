@@ -1,7 +1,8 @@
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:the_gospel/views/home/bible.dart';
+import 'package:the_gospel/views/home/bible/bible.dart';
+import 'package:the_gospel/views/home/events.dart';
 import 'package:the_gospel/views/home/home.dart';
 import 'package:the_gospel/views/home/notes.dart';
 
@@ -15,7 +16,8 @@ class HomeBottomTab extends StatefulWidget {
 int _currentIndex = 0;
 final List screens = [
   const HomeScreen(),
-  const BibleScreen(),
+  BibleScreen(),
+  const EventScreen(),
   const NoteScreen(),
 ];
 
@@ -53,6 +55,14 @@ class _HomeBottomTabState extends State<HomeBottomTab> {
                 color: Colors.black,
               ),
               label: 'Bible',
+            ),
+            NavigationDestination(
+              icon: Icon(
+                EneftyIcons.calendar_bold,
+                color: Colors.black,
+                size: 24.h,
+              ),
+              label: 'Events',
             ),
             NavigationDestination(
               icon: Icon(
