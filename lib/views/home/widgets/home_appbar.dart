@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget title;
+  final Widget? leading;
   final List<Widget>? actions;
   final bool? centerTitle;
 
@@ -10,11 +11,15 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.actions,
     this.centerTitle,
+    this.leading,
   });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: 2,
+      automaticallyImplyLeading: false,
+      leading: leading,
       surfaceTintColor: Colors.transparent,
       shadowColor: Colors.transparent,
       backgroundColor: Color(0xFFEFEFEF),

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:the_gospel/common/widgets/appbar_widgets.dart';
 import 'package:the_gospel/common/widgets/text_form_field_widgets.dart';
 import 'package:the_gospel/providers/bible_providers.dart';
 import 'package:the_gospel/resources/app_widgets.dart';
-import 'chapters_screen.dart';
+import 'package:the_gospel/views/home/widgets/bottom_sheet_widget.dart';
 
 class BibleScreen extends ConsumerStatefulWidget {
   @override
-  _BooksScreenState createState() => _BooksScreenState();
+  _BibleScreenState createState() => _BibleScreenState();
 }
 
-class _BooksScreenState extends ConsumerState<BibleScreen> {
+class _BibleScreenState extends ConsumerState<BibleScreen> {
   TextEditingController _searchController = TextEditingController();
   String searchQuery = "";
 
@@ -29,8 +30,22 @@ class _BooksScreenState extends ConsumerState<BibleScreen> {
       appBar: CustomAppbar(
         title: Text(
           "Books",
-          style: AppWidgets.text.semiBold(fontSize: 16),
+          style: AppWidgets.text.semiBold(fontSize: 24),
         ),
+        actions: [
+          Container(
+            margin: EdgeInsets.only(right: 8.w),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30.r),
+              color: const Color(0xFFDAE2EB),
+            ),
+            child: Text(
+              "KJV",
+              style: AppWidgets.text.bold(),
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -53,13 +68,7 @@ class _BooksScreenState extends ConsumerState<BibleScreen> {
                 return ListTile(
                   title: Text(filteredBooks[index]),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ChaptersScreen(bookName: filteredBooks[index]),
-                      ),
-                    );
+                    showBibleBottomSheet(context, ref, filteredBooks[index]);
                   },
                 );
               },
